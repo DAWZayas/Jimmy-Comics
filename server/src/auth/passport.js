@@ -3,6 +3,8 @@ import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
 import {Strategy as GitHubStrategy} from 'passport-github';
+import {Strategy as TwitterStrategy} from 'passport-twitter';
+
 
 // our packages
 import {User} from '../db';
@@ -87,3 +89,13 @@ passport.use(new GitHubStrategy({
   );
   done(null, {accessToken, refreshToken, profile});
 }));
+
+passport.use(new TwitterStrategy({
+    consumerKey: authConfig.twitter.clientID,
+    consumerSecret: authConfig.twitter.clientSecret,
+    callbackURL: authConfig.twitter.callbackURL,
+  }, (accessToken, refreshToken, profile, done) => {
+    User.findOrCreate({ twitterId: profile.id }, function (err, {accessToken, refreshToken, profile}) {
+      done(err, {accessToken, refreshToken, profile});
+    });
+  }));

@@ -22,9 +22,14 @@ exports.auth = {
   jwtSecret: process.env.EXPERTS_AUTH_JWTSECRET ||
     'uaeldt!2D9iVrOv1KEH#KRuaiEdJty6rRXJij$FN&D$oYKITos14Utok6W0kt83@',
   github: {
-    clientID: process.env.GITHUB_CLIENT_ID || 'b31b524fd5e239d5dc68',
-    clientSecret: process.env.GITHUB_CLIENT_SECRET || 'f3406b120ca51a3c90d542f76f2e761b71f3ebb9',
+    clientID: process.env.GITHUB_CLIENT_ID || '004c39ff535980ceac47',
+    clientSecret: process.env.GITHUB_CLIENT_SECRET || '6cb51e627d38a6694f09f36efdf9e0d831d40c62',
     callbackURL: process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/api/github/callback',
-    scope: process.env.GITHUB_CALLBACK_URL || 'user:email',
+    scope: process.env.GITHUB_SCOPE || 'user:email',
+  },
+  twitter: {
+    clientID: process.env.TWITTER_CONSUMER_KEY || '	GAcogGVPrsPhQynNAzRHOvAbL',
+    clientSecret: process.env.TWITTER_CONSUMER_SECRET || 'T40Vk2kJZr5XEPWNh443G5eyp4dRdjU8aGOsJWn5Q01rorpAz2',
+    callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8080/api/twitter/callback',
   },
 };

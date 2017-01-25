@@ -47,4 +47,34 @@ export default (app) => {
         res.status(401).send({error: 'Error logging in!'});
       }
     });
+
+    app.get('/api/twitter/login',
+      passport.authenticate('twitter'));
+
+    app.get('/api/twitter/callback',
+      passport.authenticate('twitter', {
+        failureRedirect: `http://${clientConfig.host}:${clientConfig.port}/dist/redirecting.html#error=authentication failed`,
+        session: false}
+      ),
+      (req, res) => {
+        if (req.user) {
+          const twitterUser = req.user.profile;
+
+          const user = {
+            id: `${twitterUser.provider}-${twitterUser.id}`,
+            login: twitterUser.username,
+            registrationDate: twitterUser._json.created_at, // eslint-disable-line no-underscore-dangle
+            provider: twitterUser.provider,
+            accessToken: req.user.accessToken,
+          };
+
+          const token = jwt.sign(user, authConfig.jwtSecret);
+          res.redirect(
+            `http://${clientConfig.host}:${clientConfig.port}/dist/redirecting.html#token=${token}&user=${JSON.stringify(user)}`
+          );
+        } else {
+          res.status(401).send({error: 'Error logging in!'});
+        }
+      });
+
 };

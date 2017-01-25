@@ -78,8 +78,8 @@ export const login = action$ => action$
     )),
   );
 
-export const githubLogin = action$ => action$
-  .ofType(ActionTypes.DO_GITHUB_LOGIN)
+export const providerLogin = action$ => action$
+  .ofType(ActionTypes.DO_GITHUB_LOGIN, ActionTypes.DO_TWITTER_LOGIN)
   .switchMap(({payload}) => {
     if (payload.error) {
       return Observable.of(
@@ -89,7 +89,7 @@ export const githubLogin = action$ => action$
             error: payload.error,
           },
         },
-        Actions.addNotificationAction({text: `GitHub Login error: ${payload.error}`, alertType: 'danger'}),
+        Actions.addNotificationAction({text: `Provider Login error: ${payload.error}`, alertType: 'danger'}),
       );
     } else {
       return Observable.of(
@@ -98,7 +98,7 @@ export const githubLogin = action$ => action$
           payload,
         },
         Actions.addNotificationAction(
-          {text: 'GitHub Login success', alertType: 'info'}),
+          {text: `${payload.provider} Login success`, alertType: 'info'}),
       );
     }
   });

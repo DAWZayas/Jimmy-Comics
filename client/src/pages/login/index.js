@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 // our packages
 import {loginAction} from '../../store/actions';
 import GitHubLogo from '../../components/github';
+import TwitterLogo from '../../components/twitter';
 
 const mapDispatchToProps = dispatch => ({
   onLoginClick: params => dispatch(loginAction(params)),
@@ -36,6 +37,7 @@ const Login = ({onLoginClick}) => {
           </div>
           <div className="col-xs-2 col-md-1">
             <GitHubLogo />
+            <TwitterLogo />
           </div>
         </div>
         <form>

@@ -20,6 +20,10 @@ export const githubLoginAction = payload => ({
   payload,
 });
 
+export const twitterLoginAction = payload => ({
+  type: ActionTypes.DO_TWITTER_LOGIN,
+  payload,
+});
 
 export const logoutAction = () => ({
   type: ActionTypes.DO_LOGOUT,
