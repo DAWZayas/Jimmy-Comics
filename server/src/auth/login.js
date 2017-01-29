@@ -61,8 +61,7 @@ export default (app) => {
           const googleUser = req.user.profile;
           const user = {
             id: googleUser.id,
-            login: googleUser.username,
-            registrationDate: googleUser._json.created_at,
+            login: googleUser.displayName,
             provider: googleUser.provider,
             accessToken: req.user.accessToken,
           };

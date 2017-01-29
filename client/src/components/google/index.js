@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 // our packages
 import {googleLoginAction} from '../../store/actions';
-import twitterLogo from '../../img/twitter.png';
+import googleLogo from '../../img/google.png';
 import {popupwindow} from '../../util';
 
 const mapDispatchToProps = dispatch => ({
@@ -63,7 +63,7 @@ const GoogleLogin = ({handleGoogleLogin}) => {
 
   return (
     <img
-      src={twitterLogo}
+      src={googleLogo}
       className="img-responsive"
       alt="Google login"
       style={{cursor: 'pointer'}}
