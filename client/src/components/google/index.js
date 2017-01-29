@@ -3,19 +3,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // our packages
-import {twitterLoginAction} from '../../store/actions';
+import {googleLoginAction} from '../../store/actions';
 import twitterLogo from '../../img/twitter.png';
 import {popupwindow} from '../../util';
-import {server as serverConfig} from '../../../config';
-
-const host = serverConfig.host;
-const port = serverConfig.port;
 
 const mapDispatchToProps = dispatch => ({
-  handleTwitterLogin: payload => dispatch(twitterLoginAction(payload)),
+  handleGoogleLogin: payload => dispatch(googleLoginAction(payload)),
 });
 
-const authUrl = `http://${host}:${port}/api/twitter/login`;
+const authUrl = 'http://localhost:8080/api/google/login';
 
 let authWindow = null;
 
@@ -25,7 +21,7 @@ const authorize = () => {
       error: 'Waiting until login process is completed',
     });
   }
-  authWindow = popupwindow(authUrl, 'Twitter Login', 300, 300);
+  authWindow = popupwindow(authUrl, 'Google Login', 800, 800);
   return new Promise((resolve) => {
     const checkResponse = () => {
       const hash = window.location.hash;
@@ -56,12 +52,12 @@ const authorize = () => {
   });
 };
 
-const TwitterLogin = ({handleTwitterLogin}) => {
+const GoogleLogin = ({handleGoogleLogin}) => {
   const handleClickEvent = (e) => {
     e.preventDefault();
     authorize()
-    .then(payload => handleTwitterLogin(payload))
-    .catch(payload => handleTwitterLogin(payload));
+    .then(payload => handleGoogleLogin(payload))
+    .catch(payload => handleGoogleLogin(payload));
     return false;
   };
 
@@ -69,11 +65,11 @@ const TwitterLogin = ({handleTwitterLogin}) => {
     <img
       src={twitterLogo}
       className="img-responsive"
-      alt="Twitter login"
+      alt="Google login"
       style={{cursor: 'pointer'}}
       onClick={handleClickEvent}
     />
   );
 };
 
-export default connect(null, mapDispatchToProps)(TwitterLogin);
+export default connect(null, mapDispatchToProps)(GoogleLogin);

@@ -27,9 +27,10 @@ exports.auth = {
     callbackURL: process.env.GITHUB_CALLBACK_URL || 'http://localhost:8080/api/github/callback',
     scope: process.env.GITHUB_SCOPE || 'user:email',
   },
-  twitter: {
-    clientID: process.env.TWITTER_CONSUMER_KEY || '	GAcogGVPrsPhQynNAzRHOvAbL',
-    clientSecret: process.env.TWITTER_CONSUMER_SECRET || 'T40Vk2kJZr5XEPWNh443G5eyp4dRdjU8aGOsJWn5Q01rorpAz2',
-    callbackURL: process.env.TWITTER_CALLBACK_URL || 'http://localhost:8080/api/twitter/callback',
+  google: {
+    clientID: process.env.GOOGLE_CLIENT_ID || '827725494787-gmg60d94m2132tplcj038unom12vd3oe.apps.googleusercontent.com',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'YTEuocM1Vin9DBqT5yCPlFEB',
+    callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:8080/api/google/callback',
+    scope: process.env.GOOGLE_SCOPE || 'profile',
   },
 };

@@ -3,7 +3,7 @@ import passport from 'passport';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {Strategy as JwtStrategy, ExtractJwt} from 'passport-jwt';
 import {Strategy as GitHubStrategy} from 'passport-github';
-import {Strategy as TwitterStrategy} from 'passport-twitter';
+import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 
 
 // our packages
@@ -90,12 +90,14 @@ passport.use(new GitHubStrategy({
   done(null, {accessToken, refreshToken, profile});
 }));
 
-passport.use(new TwitterStrategy({
-    consumerKey: authConfig.twitter.clientID,
-    consumerSecret: authConfig.twitter.clientSecret,
-    callbackURL: authConfig.twitter.callbackURL,
-  }, (accessToken, refreshToken, profile, done) => {
-    User.findOrCreate({ twitterId: profile.id }, function (err, {accessToken, refreshToken, profile}) {
-      done(err, {accessToken, refreshToken, profile});
-    });
-  }));
+passport.use(new GoogleStrategy({
+  clientID: authConfig.google.clientID,
+  clientSecret: authConfig.google.clientSecret,
+  callbackURL: authConfig.google.callbackURL,
+  scope: authConfig.google.scope,
+}, (accessToken, refreshToken, profile, done) => {
+  logger.info(
+    `New Google token [accessToken: ${accessToken}, refreshToken: ${refreshToken}, profile: ${JSON.stringify(profile)}]`
+  );
+  done(null, {accessToken, refreshToken, profile});
+}));
