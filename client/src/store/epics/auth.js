@@ -79,7 +79,7 @@ export const login = action$ => action$
   );
 
 export const providerLogin = action$ => action$
-  .ofType(ActionTypes.DO_GITHUB_LOGIN, ActionTypes.DO_TWITTER_LOGIN)
+  .ofType(ActionTypes.DO_GITHUB_LOGIN, ActionTypes.DO_GOOGLE_LOGIN)
   .switchMap(({payload}) => {
     if (payload.error) {
       return Observable.of(
@@ -98,7 +98,7 @@ export const providerLogin = action$ => action$
           payload,
         },
         Actions.addNotificationAction(
-          {text: `${payload.provider} Login success`, alertType: 'info'}),
+          {text: `Login with ${payload.user.provider} success`, alertType: 'info'}),
       );
     }
   });

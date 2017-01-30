@@ -15,3 +15,5 @@ COPY . /app
 RUN ./node_modules/.bin/babel src --out-dir lib
 
 CMD ["node", "lib/index.js"]
+
+EXPOSE 8080

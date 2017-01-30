@@ -20,6 +20,11 @@ export const githubLoginAction = payload => ({
   payload,
 });
 
+export const googleLoginAction = payload => ({
+  type: ActionTypes.DO_GOOGLE_LOGIN,
+  payload,
+});
+
 export const logoutAction = () => ({
   type: ActionTypes.DO_LOGOUT,
 });
