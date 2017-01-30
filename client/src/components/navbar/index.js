@@ -22,7 +22,9 @@ const NavBar = ({actualPath, user}) => (
           <span className="icon-bar" />
         </button>
         <Link to="/" className="navbar-brand">Jimmy Comics</Link>
+        <Link to="/create" className="navbar-brand">Create new Comic</Link>
       </div>
+
       <div id="navbar" className="navbar-collapse collapse">
         {user ? <ul className="nav navbar-nav navbar-right">
           <li><a>Logged as {user.login}{user.provider ? ` (${user.provider})` : null}</a></li>

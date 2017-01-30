@@ -12,7 +12,7 @@ import {logger} from './util';
 import {auth as authConfig} from '../config';
 import setupAuthRoutes from './auth';
 import setupUserRoutes from './user';
-import setupQuestionRoutes from './question';
+import setupComicRoutes from './comic';
 
 // init app
 const app = express();
@@ -52,7 +52,7 @@ setupAuthRoutes(app);
 // setup user routes
 setupUserRoutes(app);
 // setup question routes
-setupQuestionRoutes(app);
+setupComicRoutes(app);
 
 // catch all unhandled errors
 app.use((err, req, res, next) => {

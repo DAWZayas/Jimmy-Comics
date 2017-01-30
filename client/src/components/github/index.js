@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 // our packages
 import {githubLoginAction} from '../../store/actions';
-import githubLogo from '../../img/github.png';
+import githubLogo from '../../img/icons/github.png';
 import {popupwindow} from '../../util';
 import {server as serverConfig} from '../../../config';
 

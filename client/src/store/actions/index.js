@@ -20,11 +20,6 @@ export const githubLoginAction = payload => ({
   payload,
 });
 
-export const twitterLoginAction = payload => ({
-  type: ActionTypes.DO_TWITTER_LOGIN,
-  payload,
-});
-
 export const logoutAction = () => ({
   type: ActionTypes.DO_LOGOUT,
 });
@@ -64,10 +59,8 @@ export const removeNotificationByRefAction = notificationRef => ({
   payload: {notificationRef},
 });
 
-
-export const getMoreQuestions = payload => ({
-  type: ActionTypes.GET_MORE_QUESTIONS,
-  payload,
+export const getAllComics = () => ({
+  type: ActionTypes.GET_ALL_COMICS,
 });
 
 export const addObservable = observable => ({
@@ -90,7 +83,12 @@ export const answerQuestion = payload => ({
   payload,
 });
 
-export const createQuestion = payload => ({
-  type: ActionTypes.CREATE_QUESTION,
+export const createComic = payload => ({
+  type: ActionTypes.CREATE_COMIC,
   payload,
+});
+
+export const deleteComic = comicId => ({
+  type: ActionTypes.DELETE_COMIC,
+  comicId,
 });
