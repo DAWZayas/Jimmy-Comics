@@ -60,7 +60,7 @@ export default (app) => {
         if (req.user) {
           const googleUser = req.user.profile;
           const user = {
-            id: googleUser.id,
+            id: `${googleUser.provider}-${googleUser.id}`,
             login: googleUser.displayName,
             provider: googleUser.provider,
             accessToken: req.user.accessToken,
@@ -73,4 +73,36 @@ export default (app) => {
           res.status(401).send({error: 'Error logging in!'});
         }
       });
+      app.get('/api/facebook/login',
+        passport.authenticate('facebook', {
+          accessType: 'offline',
+          session: false,
+        }));
+
+      app.get('/api/facebook/callback',
+        passport.authenticate('facebook', {
+          failureRedirect: `http://${clientConfig.host}:${clientConfig.port}/dist/redirecting.html#error=authentication failed`,
+          session: false}
+        ),
+        (req, res) => {
+          if (req.user) {
+            const facebookUser = req.user.profile;
+
+            const user = {
+              id: `${facebookUser.provider}-${facebookUser.id}`,
+              login: facebookUser.displayName,
+              registrationDate: facebookUser._json.created_at, // eslint-disable-line no-underscore-dangle
+              provider: facebookUser.provider,
+              accessToken: req.user.accessToken,
+            };
+
+            const token = jwt.sign(user, authConfig.jwtSecret);
+            res.redirect(
+              `http://${clientConfig.host}:${clientConfig.port}/dist/redirecting.html#token=${token}&user=${JSON.stringify(user)}`
+            );
+          } else {
+            res.status(401).send({error: 'Error logging in!'});
+          }
+        });
+
 };

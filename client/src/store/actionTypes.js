@@ -7,6 +7,7 @@ export const INIT_AUTH_SUCCESS = 'INIT_AUTH_SUCCESS';
 export const DO_LOGIN = 'DO_LOGIN';
 export const DO_GITHUB_LOGIN = 'DO_GITHUB_LOGIN';
 export const DO_GOOGLE_LOGIN = 'DO_GOOGLE_LOGIN';
+export const DO_FACEBOOK_LOGIN = 'DO_FACEBOOK_LOGIN';
 export const DO_LOGOUT = 'DO_LOGOUT';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';

@@ -3,8 +3,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // our packages
-import {googleLoginAction} from '../../store/actions';
-import googleLogo from '../../img/icons/google.png';
+import {facebookLoginAction} from '../../store/actions';
+import facebookLogo from '../../img/icons/facebook.png';
 import {popupwindow} from '../../util';
 import {server as serverConfig} from '../../../config';
 
@@ -13,10 +13,10 @@ const port = serverConfig.port;
 
 
 const mapDispatchToProps = dispatch => ({
-  handleGoogleLogin: payload => dispatch(googleLoginAction(payload)),
+  handleFacebookLogin: payload => dispatch(facebookLoginAction(payload)),
 });
 
-const authUrl = `http://${host}:${port}/api/google/login`;
+const authUrl = `http://${host}:${port}/api/facebook/login`;
 
 let authWindow = null;
 
@@ -26,7 +26,7 @@ const authorize = () => {
       error: 'Waiting until login process is completed',
     });
   }
-  authWindow = popupwindow(authUrl, 'Google Login', 800, 800);
+  authWindow = popupwindow(authUrl, 'Facebook Login', 800, 800);
   return new Promise((resolve) => {
     const checkResponse = () => {
       const hash = window.location.hash;
@@ -57,24 +57,24 @@ const authorize = () => {
   });
 };
 
-const GoogleLogin = ({handleGoogleLogin}) => {
+const FacebookLogin = ({handleFacebookLogin}) => {
   const handleClickEvent = (e) => {
     e.preventDefault();
     authorize()
-    .then(payload => handleGoogleLogin(payload))
-    .catch(payload => handleGoogleLogin(payload));
+    .then(payload => handleFacebookLogin(payload))
+    .catch(payload => handleFacebookLogin(payload));
     return false;
   };
 
   return (
     <img
-      src={googleLogo}
+      src={facebookLogo}
       className="img-responsive"
-      alt="Google login"
+      alt="Facebook login"
       style={{cursor: 'pointer'}}
       onClick={handleClickEvent}
     />
   );
 };
 
-export default connect(null, mapDispatchToProps)(GoogleLogin);
+export default connect(null, mapDispatchToProps)(FacebookLogin);

@@ -25,6 +25,11 @@ export const googleLoginAction = payload => ({
   payload,
 });
 
+export const facebookLoginAction = payload => ({
+  type: ActionTypes.DO_FACEBOOK_LOGIN,
+  payload,
+});
+
 export const logoutAction = () => ({
   type: ActionTypes.DO_LOGOUT,
 });

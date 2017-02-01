@@ -33,4 +33,9 @@ exports.auth = {
     callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:8080/api/google/callback',
     scope: process.env.GOOGLE_SCOPE || 'profile',
   },
+  facebook: {
+    clientID: process.env.FACEBOOK_CLIENT_ID || '225189487942856',
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET || 'fc26778dbc8f52beefd291dab92190e6',
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:8080/api/facebook/callback',
+  },
 };

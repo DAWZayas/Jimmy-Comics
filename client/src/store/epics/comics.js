@@ -12,7 +12,7 @@ export const getComics = action$ => action$
   .ofType(ActionTypes.GET_ALL_COMICS)
   .map(signRequest)
   .switchMap(({headers}) => Observable
-    .ajax.get('http://localhost:8080/api/comic', headers)
+    .ajax.get(`http://${host}:${port}/api/comic`, headers)
     .map(res => res.response)
     .map(comics => ({
       type: ActionTypes.GET_ALL_COMICS_SUCCESS,
@@ -54,7 +54,7 @@ export const createComic = action$ => action$
     .ofType(ActionTypes.DELETE_COMIC)
     .map(signRequest)
     .switchMap(({headers, comicId}) => Observable
-      .ajax.delete(`http://localhost:8080/api/comic/${comicId}`, headers)
+      .ajax.delete(`http://${host}:${port}/api/comic/${comicId}`, headers)
       .map(res => res.response)
       .mergeMap(comic => Observable.of ({
         type: ActionTypes.DELETE_COMIC_SUCCESS,

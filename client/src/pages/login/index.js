@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {loginAction} from '../../store/actions';
 import GitHubLogo from '../../components/github';
 import GoogleLogo from '../../components/google';
+import FacebookLogo from '../../components/facebook';
 
 const mapDispatchToProps = dispatch => ({
   onLoginClick: params => dispatch(loginAction(params)),
@@ -38,6 +39,7 @@ const Login = ({onLoginClick}) => {
           <div className="col-xs-2 col-md-1">
             <GitHubLogo />
             <GoogleLogo />
+            <FacebookLogo />
           </div>
         </div>
         <form>
