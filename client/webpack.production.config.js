@@ -63,8 +63,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        EXPERTS_SERVER_URL: JSON.stringify('jcserver-jimmy-comics-shop.44fs.preview.openshiftapps.com'),
-        EXPERTS_SERVER_PORT: JSON.stringify('80'),
+        JCS_SERVER_SERVICE_HOST: JSON.stringify('jcserver-jimmy-comics-shop.44fs.preview.openshiftapps.com'),
+        JCS_SERVER_PORT_8080_TCP_PORT: JSON.stringify('80'),
       },
     }),
     new webpack.optimize.UglifyJsPlugin({
