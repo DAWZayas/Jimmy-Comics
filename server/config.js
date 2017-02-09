@@ -30,9 +30,7 @@ exports.auth = {
   google: {
     clientID: process.env.GOOGLE_CLIENT_ID || '827725494787-gmg60d94m2132tplcj038unom12vd3oe.apps.googleusercontent.com',
     clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'YTEuocM1Vin9DBqT5yCPlFEB',
-    callbackURL: process.env.GOOGLE_CALLBACK_URL ||
-    `http://${process.env.JCS_SERVER_SERVICE_HOST}:${process.env.JCS_SERVER_PORT_8080_TCP_PORT}/api/google/callback` ||
-     'http://localhost:8080/api/google/callback',
+    callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:8080/api/google/callback',
     scope: process.env.GOOGLE_SCOPE || 'profile',
   },
   facebook: {
