@@ -23,7 +23,7 @@ import {requireAuth} from './util';
 
 // our pages
 import Home from './pages/home';
-import Create from './pages/create';
+import Create from './pages/collection/create';
 import Login from './pages/login';
 import Register from './pages/register';
 import NotFound from './pages/notfound';

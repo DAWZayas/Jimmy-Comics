@@ -4,25 +4,25 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import Comic from '../../components/comic';
-import {getAllComics} from '../../store/actions';
+import Collection from '../../components/collection';
+import {getAllCollections} from '../../store/actions';
 
 
 const mapStateToProps = (state) => ({
-  comics: state.comics.comics,
+  collections: state.collections.collections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchComics: _.once(() => dispatch(getAllComics())),
+  fetchCollections: _.once(() => dispatch(getAllCollections())),
 });
 
 
-const Home = ({fetchComics, doAnswer, comics}) => {
-  fetchComics();
+const Home = ({fetchCollections, collections}) => {
+  fetchCollections();
   return(
     <div>
-        {comics.map(comic => (
-          <Comic key={comic.id} comic={comic} />
+        {collections.map(collection => (
+          <Collection key={collection.id} collection={collection} />
         ))}
     </div>
   );

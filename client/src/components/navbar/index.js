@@ -22,7 +22,7 @@ const NavBar = ({actualPath, user}) => (
           <span className="icon-bar" />
         </button>
         <Link to="/" className="navbar-brand">Jimmy Comics</Link>
-        <Link to="/create" className="navbar-brand">Create new Comic</Link>
+        <Link to="/create" className="navbar-brand">Create new Collection</Link>
       </div>
 
       <div id="navbar" className="navbar-collapse collapse">

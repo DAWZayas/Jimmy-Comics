@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {deleteComic} from '../../store/actions';
-import styles from './comic.css'
+import {deleteCollection} from '../../store/actions';
+import styles from './collection.css'
 import photo from '../../img/comic/photo.png';
-import githubLogo from '../../img/icons/github.png';
+
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteComicClick: comicId => dispatch(deleteComic(comicId))
+  onDeleteCollectionClick: collectionId => dispatch(deleteCollection(collectionId))
 });
 
-const Comic = ({comic, onDeleteComicClick}) => {
+const Collection = ({collection, onDeleteCollectionClick}) => {
 
   const handleClick = (e) => {
   };
@@ -21,11 +21,11 @@ const Comic = ({comic, onDeleteComicClick}) => {
       <div className={`${styles.grid_photo_wrap}`}>
         <img src={photo} className={`${styles.grid_photo}`} />
         <div className={`${styles.panel_body}`}>
-          <p>Comic: {comic.name}</p>
+          <p>Collection: {collection.title}</p>
         </div>
       </div>
       <figcaption>
-        <button type="button" className="btn btn-warning"  onClick={() => onDeleteComicClick(comic.id)} >Delete</button>
+        <button type="button" className="btn btn-warning"  onClick={() => onDeleteCollectionClick(collection.id)}>Delete</button>
       </figcaption>
       </div>
       </div>
@@ -34,4 +34,4 @@ const Comic = ({comic, onDeleteComicClick}) => {
 };
 
 
-export default connect(null, mapDispatchToProps)(Comic);
+export default connect(null, mapDispatchToProps)(Collection);
