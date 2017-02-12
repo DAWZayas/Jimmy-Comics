@@ -60,7 +60,7 @@ export const deleteCollection = action$ => action$
       type: ActionTypes.DELETE_COLLECTION_SUCCESS,
       collectionId,
     },
-    Actions.addNotificationAction({text: `Collection with title "${collection.title}" deleteds`, alertType: 'info'})
+    Actions.addNotificationAction({text: 'Delete Collection Success' , alertType: 'info'})
     ))
     .catch(error => Observable.of({
       type: ActionTypes.DELETE_COLLECTION_ERROR,

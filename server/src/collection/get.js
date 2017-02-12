@@ -10,7 +10,7 @@ export default (app) => {
   }));
 
   app.get('/api/collection', passport.authenticate('jwt', {session: false}), asyncRequest(async (req, res) => {
-  const collection = await Collection.orderBy(r.asc('title'));
-  res.send(collection);
+  const collections = await Collection.orderBy(r.asc('title'));
+  res.send(collections);
 }));
 };

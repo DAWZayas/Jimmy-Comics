@@ -13,7 +13,7 @@ export default (app) => {
     }
 
     const collection = new Collection({
-      title
+      title,
     });
     await collection.save();
 

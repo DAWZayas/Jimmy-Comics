@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import {createCollection} from '../../store/actions';
 
+
 const mapStateToProps = (state) => ({
 });
 

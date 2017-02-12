@@ -8,6 +8,6 @@ export const Collection = thinky.createModel('Collection', {
       price: thinky.type.number().required(),
       creationDate: thinky.type.date().default(thinky.r.now()),
       description: thinky.type.string(),
-      })
+    })
   ).default([]),
 });

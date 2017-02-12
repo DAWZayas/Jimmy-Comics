@@ -27,7 +27,7 @@ export const collections = (state = initialState, action) => {
     }
     case ActionTypes.DELETE_COLLECTION: {
       const newCollections = state.collections.filter(collection => collection.id !== action.collectionId);
-      return {...state, collection: newCollections};
+      return {...state, collections: newCollections};
     }
     default:
       return state;

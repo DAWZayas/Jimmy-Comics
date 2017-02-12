@@ -51,7 +51,7 @@ app.get('/', (req, res) => {
 setupAuthRoutes(app);
 // setup user routes
 setupUserRoutes(app);
-// setup question routes
+// setup collection routes
 setupCollectionRoutes(app);
 
 // catch all unhandled errors

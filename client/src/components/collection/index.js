@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {deleteCollection} from '../../store/actions';
 import styles from './collection.css'
-import photo from '../../img/comic/photo.png';
+import photo from '../../img/collection/photo.png';
 
 
 const mapDispatchToProps = dispatch => ({
