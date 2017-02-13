@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import Collection from '../../components/collection';
+
 import {getComics} from '../../store/actions';
 
 

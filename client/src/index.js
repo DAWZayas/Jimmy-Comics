@@ -40,6 +40,7 @@ ReactDOM.render((
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Home} onEnter={requireAuth} />
+        <Route path='createComic/:collectionId' component = {MakeComic }/>
         <Route path="login" component={Login} />
         <Route path="/view/:collectionId" component={Comics}></Route>
         <Route path="register" component={Register} />

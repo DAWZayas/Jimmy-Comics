@@ -26,31 +26,33 @@ const Home = ({fetchCollections, collections}) => {
   fetchCollections();
   return(
     <div>
+
+    <div className="col-xs-12 col-sm-6 col-lg-4 ">
+      <div className={`${styles.photo_grid}`} >
+      <div className={`${styles.grid_figure}`} >
+      <div className={`${styles.grid_photo_wrap}`}>
+        <a href="#modalCreateCollection"><img src={photo} className={`${styles.grid_photo}`} /></a>
+        <div className={`${styles.panel_body}`}>
+          <p>Add new Collection</p>
+        </div>
+      </div>
+      </div>
+      </div>
+      <div id="modalCreateCollection" className={modal.overlay}>
+       <div className={modal.popup}>
+        <h2>Create Collection</h2>
+        <a className={modal.close} href="/">&times;</a>
+         <div className={modal.content}>
+          <Create />
+         </div>
+       </div>
+
+       </div>
+     </div>
         {collections.map(collection => (
           <Collection key={collection.id} collection={collection} />
         ))}
-        <div className="col-xs-12 col-sm-6 col-lg-4 ">
-          <div className={`${styles.photo_grid}`} >
-          <div className={`${styles.grid_figure}`} >
-          <div className={`${styles.grid_photo_wrap}`}>
-            <a href="#modalCreateCollection"><img src={photo} className={`${styles.grid_photo}`} /></a>
-            <div className={`${styles.panel_body}`}>
-              <p>Add new Collection</p>
-            </div>
-          </div>
-          </div>
-          </div>
-          <div id="modalCreateCollection" className={modal.overlay}>
-           <div className={modal.popup}>
-            <h2>Create Collection</h2>
-            <a className={modal.close} href="/">&times;</a>
-             <div className={modal.content}>
-              <Create />
-             </div>
-           </div>
 
-           </div>
-         </div>
       </div>
   );
 };
