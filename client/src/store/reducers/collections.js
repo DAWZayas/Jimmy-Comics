@@ -25,6 +25,9 @@ export const collections = (state = initialState, action) => {
       const newCollections = [...state.collections, action.payload];
       return {...state, collections: newCollections};
     }
+    case ActionTypes.CREATE_COMIC_SUCCESS:
+      const newCollections = state.collections.map(q => q.id === action.payload.id ? action.payload : q);
+      return Object.assign({}, state, {collections: newCollections})
     case ActionTypes.DELETE_COLLECTION: {
       const newCollections = state.collections.filter(collection => collection.id !== action.collectionId);
       return {...state, collections: newCollections};

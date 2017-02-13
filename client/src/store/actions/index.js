@@ -73,6 +73,10 @@ export const getAllCollections = () => ({
   type: ActionTypes.GET_ALL_COLLECTIONS,
 });
 
+export const getComics = () => ({
+  type: ActionTypes.GET_COMICS,
+});
+
 export const addObservable = observable => ({
   type: ActionTypes.ADD_OBSERVABLE,
   payload: observable,
@@ -83,18 +87,13 @@ export const removeObservable = payload => ({
   payload,
 });
 
-export const getAnswers = questionId => ({
-  type: ActionTypes.GET_ANSWERS,
-  payload: {questionId},
-});
-
-export const answerQuestion = payload => ({
-  type: ActionTypes.ANSWER_QUESTION,
+export const createCollection = payload => ({
+  type: ActionTypes.CREATE_COLLECTION,
   payload,
 });
 
-export const createCollection = payload => ({
-  type: ActionTypes.CREATE_COLLECTION,
+export const createComic = payload => ({
+  type: ActionTypes.CREATE_COMIC,
   payload,
 });
 

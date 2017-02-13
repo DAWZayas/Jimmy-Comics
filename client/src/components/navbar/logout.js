@@ -13,11 +13,7 @@ const Logout = ({onLogoutClick}) => {
   };
 
   return (
-    <li>
-      <p className="navbar-btn">
-        <a className="btn btn-default" onClick={handleLogoutClick}>Logout</a>
-      </p>
-    </li>
+    <button className="navbar-btn btn" style={{ backgroundColor:'#ff610f'}} onClick={handleLogoutClick}>Logout</button>
   );
 };
 

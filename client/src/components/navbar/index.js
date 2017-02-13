@@ -4,35 +4,28 @@ import {Link} from 'react-router';
 
 import NavbarLink from './navbarLink';
 import Logout from './logout';
+import jimmyLogo from '../../img/icons/jimmycomics.png';
 
 const NavBar = ({actualPath, user}) => (
-  <nav className="navbar navbar-default">
-    <div className="container-fluid">
-      <div className="navbar-header">
-        <button
-          type="button"
-          className="navbar-toggle collapsed"
-          data-toggle="collapse"
-          data-target="#navbar"
-          aria-expanded="false"
-          aria-controls="navbar">
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar" />
-          <span className="icon-bar" />
-          <span className="icon-bar" />
-        </button>
-        <Link to="/" className="navbar-brand">Jimmy Comics</Link>
-        <Link to="/create" className="navbar-brand">Create new Collection</Link>
-      </div>
-
-      <div id="navbar" className="navbar-collapse collapse">
-        {user ? <ul className="nav navbar-nav navbar-right">
-          <li><a>Logged as {user.login}{user.provider ? ` (${user.provider})` : null}</a></li>
-          <Logout />
-        </ul> : null}
-      </div>
+  <nav className="navbar navbar-toggleable-xs navbar-dark" style={{ backgroundColor:'#ff610f'}}>
+    <div className="container">
+        <Link to="/" className="navbar-brand">
+        <img
+          src={jimmyLogo}
+          style={{ width:'50%', paddingBottom:"10%", paddingBLeft:"80%"}}
+          className="img-responsive"
+          alt="Jimmy Comics Logo"
+        />
+        </Link>
+        <Link to="/" className="navbar-brand">Logged as {user.login}{user.provider ? ` (${user.provider})` : null}</Link>
+        <li className="nav-item dropdown btn-group navbar-toggler-right">
+          <a className="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"> <span className="navbar-toggler-icon"></span></a>
+          <div className="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
+              <a className="dropdown-item"><Logout /></a>
+          </div>
+        </li>
     </div>
-  </nav>
+</nav>
 );
 
 export default NavBar;

@@ -5,7 +5,7 @@ export const Collection = thinky.createModel('Collection', {
   comics: thinky.type.array().schema(
     thinky.type.object().schema({
       name: thinky.type.string().required(),
-      price: thinky.type.number().required(),
+      price: thinky.type.number(),
       creationDate: thinky.type.date().default(thinky.r.now()),
       description: thinky.type.string(),
     })

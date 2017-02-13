@@ -8,6 +8,8 @@ import {Provider} from 'react-redux';
 
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbootstrap/css/bootstrap.min.css';
+import 'mdbootstrap/css/mdb.min.css';
 import './scss/main.scss';
 
 
@@ -23,7 +25,8 @@ import {requireAuth} from './util';
 
 // our pages
 import Home from './pages/home';
-import Create from './pages/collection/create';
+import MakeComic from './pages/collection/createComic';
+import Comics from './pages/comics';
 import Login from './pages/login';
 import Register from './pages/register';
 import NotFound from './pages/notfound';
@@ -38,7 +41,7 @@ ReactDOM.render((
       <Route path="/" component={App}>
         <IndexRoute component={Home} onEnter={requireAuth} />
         <Route path="login" component={Login} />
-        <Route path="create" component={Create} />
+        <Route path="/view/:collectionId" component={Comics}></Route>
         <Route path="register" component={Register} />
         <Route path="*" component={NotFound} />
       </Route>

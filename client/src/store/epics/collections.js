@@ -24,6 +24,46 @@ export const getCollections = action$ => action$
     })),
   );
 
+export const getComics = action$ => action$
+  .ofType(ActionTypes.GET_COMICS)
+  .map(signRequest)
+  .mergeMap(({headers, payload}) => Observable
+    .ajax.get(`http://${host}:${port}/api/collection/${payload.collectionId}`, headers)
+    .map(res => res.response)
+    .map(collection => ({
+      type: ActionTypes.GET_COMICS_SUCCESS,
+      payload: collection,
+    }))
+    .catch(error => Observable.of(
+      {
+        type: ActionTypes.GET_COMICS_ERROR,
+        payload: {error},
+      },
+      Actions.addNotificationAction(
+        {text: `[get comics] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'},
+      ),
+    )),
+  );
+
+export const createComic = action$ => action$
+  .ofType(ActionTypes.CREATE_COMIC)
+  .map(signRequest)
+  .switchMap(({headers, payload}) => Observable
+    .ajax.post(`http://${host}:${port}/api/collection/${payload.collectionId}/comic`, {name: payload.name}, headers)
+    .map(res => res.response)
+    .mergeMap(collection => Observable.of ({
+      type: ActionTypes.CREATE_COMIC_SUCCESS,
+      payload: collection,
+    },
+    Actions.addNotificationAction({text: 'Create Comic Success' , alertType: 'info'})
+  ))
+    .catch(error => Observable.of({
+      type: ActionTypes.CREATE_COMIC_ERROR,
+      payload: {error},
+    })),
+  );
+
+
 export const createCollection = action$ => action$
   .ofType(ActionTypes.CREATE_COLLECTION)
   .map(signRequest)

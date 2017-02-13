@@ -2,7 +2,7 @@ import {initAuth, login, providerLogin, register, logout} from './auth';
 import {addNotification} from './notifications';
 import {addObservable, openConnection, closeConnection} from './realtime';
 import {helloWorld} from './helloworld';
-import {createCollection,getCollections,deleteCollection } from './collections';
+import {createCollection,getCollections,deleteCollection,getComics,createComic } from './collections';
 
 export default [
   // auth
@@ -21,4 +21,6 @@ export default [
   createCollection,
   getCollections,
   deleteCollection,
+  getComics,
+  createComic,
 ];
