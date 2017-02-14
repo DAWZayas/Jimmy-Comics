@@ -24,7 +24,6 @@ class MakeComic extends Component{
 
   render(){
     let nameInput;
-
     const {collection, doCreateComic} = this.props;
 
 
@@ -48,7 +47,7 @@ class MakeComic extends Component{
     return (
 
     <div>
-      <h2>Add Comics to </h2>
+      <p>Add Comics to {collection.title} </p>
       <form className="form-horizontal">
         <div className="col-sm-10">
           <input

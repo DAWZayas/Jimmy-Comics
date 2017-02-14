@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {deleteCollection} from '../../store/actions';
+import {deleteCollection, getCollectionInfo} from '../../store/actions';
 import styles from '../../css/collection.css';
 import modal from '../../css/modal.css';
 import photo from '../../img/collection/photo.png';
@@ -15,19 +15,31 @@ const mapStateToProps = (state, {collection}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onDeleteCollectionClick: collectionId => dispatch(deleteCollection(collectionId))
+  onDeleteCollectionClick: collectionId => dispatch(deleteCollection(collectionId)),
+  onSaveCollectionInfoClick: payload => dispatch(getCollectionInfo(payload)),
 });
 
 class Collection  extends Component{
 
 constructor(props){
   super(props);
+  this.state = {
+       collapse: true,
+     };
+
 }
 
 render (){
-  const {collection, onDeleteCollectionClick} = this.props;
-  const id = collection.id;
-  console.log (id);
+  const {collection, onDeleteCollectionClick, onSaveCollectionInfoClick} = this.props;
+  const {collapse} = this.state;
+
+  const handleCollapseClick = (e) => {
+      e.preventDefault();
+      this.setState({
+        collapse: !this.state.collapse,
+      });
+      return false;
+    };
 
     return (
       <div className="col-xs-12 col-sm-6 col-lg-4 ">
@@ -41,7 +53,8 @@ render (){
         </div>
         <figcaption>
           <button type="button" className="btn btn-warning"  onClick={() => onDeleteCollectionClick(collection.id)}>Delete</button>
-          <Link to={`createComic/${collection.id}`}><button type="button" className="btn btn-warning">Add Comic</button></Link>
+          <button type="button" className="btn btn-warning" onClick={handleCollapseClick}>Add Comic</button>
+          {collapse ? null : <MakeComic collection = {collection}/>}
         </figcaption>
         </div>
       </div>

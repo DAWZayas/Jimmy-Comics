@@ -15,6 +15,11 @@ export const collections = (state = initialState, action) => {
         collections: action.payload.collections,
         status: 'done',
       };
+    case ActionTypes.GET_COLLECTION_INFO:
+        return {
+          collections: [action.payload.collections],
+          status:'polladura',
+        };
     case ActionTypes.GET_ALL_COLLECTIONS_ERROR:
       return {
         ...state,

@@ -73,6 +73,11 @@ export const getAllCollections = () => ({
   type: ActionTypes.GET_ALL_COLLECTIONS,
 });
 
+export const getCollectionInfo = payload => ({
+  type: ActionTypes.GET_COLLECTION_INFO,
+  payload,
+});
+
 export const getComics = () => ({
   type: ActionTypes.GET_COMICS,
 });
