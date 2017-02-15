@@ -1,4 +1,4 @@
-import {initAuth, login, providerLogin, register, logout} from './auth';
+import {initAuth, login, providerLogin, register, logout, updateUser, updateProfile} from './auth';
 import {addNotification} from './notifications';
 import {addObservable, openConnection, closeConnection} from './realtime';
 import {helloWorld} from './helloworld';
@@ -10,6 +10,8 @@ export default [
   login,
   providerLogin,
   register,
+  updateUser,
+  updateProfile,
   logout,
   addNotification,
   addObservable,

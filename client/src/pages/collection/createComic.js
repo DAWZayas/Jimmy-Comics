@@ -26,9 +26,6 @@ class MakeComic extends Component{
     let nameInput;
     const {collection, doCreateComic} = this.props;
 
-
-    console.log("*****", collection);
-
     const handleClick = (e) => {
       e.preventDefault();
 

@@ -60,7 +60,12 @@ export default (app) => {
       user.password = hash(password);
     }
     // try to save
-    await user.save();
+    try {
+      await user.save();
+    } catch (e) {
+      res.status(400).send({error: e.toString()});
+      return;
+    }
 
     // send succcess
     delete user.password;

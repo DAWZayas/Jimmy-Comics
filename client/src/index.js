@@ -29,6 +29,7 @@ import MakeComic from './pages/collection/createComic';
 import Comics from './pages/comics';
 import Login from './pages/login';
 import Register from './pages/register';
+import Profile from './pages/profile';
 import NotFound from './pages/notfound';
 
 // Create an enhanced history that syncs navigation events with the store
@@ -44,6 +45,7 @@ ReactDOM.render((
         <Route path="login" component={Login} />
         <Route path="/view/:collectionId" component={Comics}></Route>
         <Route path="register" component={Register} />
+        <Route path="profile" component={Profile} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

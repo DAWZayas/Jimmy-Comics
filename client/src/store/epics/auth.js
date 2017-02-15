@@ -4,6 +4,7 @@ import * as ActionTypes from '../actionTypes';
 import * as Actions from '../actions';
 import {loginErrorToMessage, registerErrorToMessage} from '../../util';
 import {server as serverConfig} from '../../../config';
+import {signRequest, ajaxErrorToMessage} from '../../util';
 
 const host = serverConfig.host;
 const port = serverConfig.port;
@@ -134,3 +135,55 @@ export const logout = action$ => action$
     .switchMap(() => Observable.of(
       Actions.addNotificationAction({text: 'Logout success', alertType: 'info'}),
     ));
+
+export const updateUser = action$ => action$
+  .ofType(ActionTypes.DO_UPDATE_USER)
+  .map(signRequest)
+  .switchMap(({headers, payload}) => Observable
+  .ajax.post(`http://${host}:${port}/api/user/${payload.id}`, payload, headers)
+  .map(res => res.response)
+  .mergeMap(response => Observable.of(
+    {
+      type: ActionTypes.DO_UPDATE_USER_SUCCESS,
+      payload: response,
+  },
+  Actions.addNotificationAction(
+    {text: 'Update success', alertType: 'info'},
+  ),
+  ))
+  .catch(error => Observable.of(
+    {
+      type: ActionTypes.DO_UPDATE_USER_ERROR,
+      payload: {
+        error,
+      },
+    },
+    Actions.addNotificationAction({text: registerErrorToMessage(error), alertType: 'danger'}),
+  )),
+);
+
+export const updateProfile = action$ => action$
+  .ofType(ActionTypes.DO_UPDATE_PROFILE)
+  .map(signRequest)
+  .switchMap(({headers, payload}) => Observable
+    .ajax.post(`http://${host}:${port}/api/user/profile/${payload.id}`, payload, headers)
+    .map(res => res.response)
+    .mergeMap(response => Observable.of(
+      {
+        type: ActionTypes.DO_UPDATE_PROFILE_SUCCESS,
+        payload: response,
+    },
+    Actions.addNotificationAction(
+      {text: 'Update success', alertType: 'info'},
+    ),
+  ))
+  .catch(error => Observable.of(
+    {
+      type: ActionTypes.DO_UPDATE_PROFILE_ERROR,
+      payload: {
+        error,
+      },
+    },
+    Actions.addNotificationAction({text: registerErrorToMessage(error), alertType: 'danger'}),
+  )),
+);

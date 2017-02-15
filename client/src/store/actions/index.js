@@ -106,3 +106,13 @@ export const deleteCollection = collectionId => ({
   type: ActionTypes.DELETE_COLLECTION,
   collectionId,
 });
+
+export const updateUser = payload => ({
+  type: ActionTypes.DO_UPDATE_USER,
+  payload,
+});
+
+export const updateProfile = payload => ({
+  type: ActionTypes.DO_UPDATE_PROFILE,
+  payload,
+});

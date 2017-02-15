@@ -1,0 +1,19 @@
+.profile_title{
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  color: #FFF;
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+  font-size: 1.25rem;
+  font-family: Roboto,sans-serif;
+  line-height: inherit;
+  background-color: #ff610f;
+}
+
+.form_group{
+  color: #FFF;
+}
+
+.input{
+  color: #FFF;
+}
