@@ -1,12 +1,13 @@
 import passport from 'passport';
-
-import {User} from '../db';
+import fs from 'fs';
+import {User, r} from '../db';
 import {hash, asyncRequest} from '../util';
+import {server as serverConfig} from '../../config';
 
 export default (app) => {
   app.post('/api/user/profile/:id', passport.authenticate('jwt', {session: false}), asyncRequest(async (req, res) => {
 
-    const {name, surname, email} = req.body;
+    const {name, surname, email, image} = req.body;
     const user = await User.get(req.params.id);
 
     if (req.user.id !== req.params.id) {
@@ -14,7 +15,13 @@ export default (app) => {
       return;
     }
 
-    // update data
+    // update profile data
+    if(image){
+      const base64Data = decodeURIComponent(image).replace(/^data:image\/jpeg;base64,/, '');
+      fs.writeFileSync(__dirname + '/../../public/images/profiles/' + req.params.id + '.jpg', base64Data, 'base64');
+      user.image = `http://${serverConfig.host}:${serverConfig.port}/static/images/profiles/` + req.params.id + '.jpg';
+
+    }
     if (name) {
       user.name = name;
     }
@@ -25,7 +32,7 @@ export default (app) => {
       user.email = email;
     }
 
-  
+
     // send succcess
     try {
       await user.save();

@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 import modal from '../../css/modal.css';
 import UpdateProfile from './updateProfile';
 import UpdateUser from './updateUser';
+import UpdateAvatar from './updateAvatar';
 import styles from '../../css/profile.css';
+import {server as serverConfig} from '../../../config';
 
 const mapStateToProps = (state) => ({
   user: state.auth.user
@@ -17,9 +19,15 @@ const Profile = ({user}) => (
   <div>
       <div className="card-block">
       <div className="col-xs-12 col-sm-4">
-        <img src="http://2.gravatar.com/avatar/e9de252843e9ff541060127dac7126ed?s=150&d=mm&r=g"
-          className="img-fluid rounded-circle z-depth-2"
-          style={{display:"inlineBlock", margin:"auto", marginBottom:20}} />
+        <a href="#modalAvatar">
+          <img
+            key={Math.random() + 'avatar'}
+            src={ user.image ||
+              "https://pbs.twimg.com/profile_images/764592533636808704/YGrGoK0_.jpg"}
+            className={`${styles.avatar}`}
+            style={{display:"inlineBlock", margin:"auto", marginBottom:20, width:200}}
+           />
+        </a>
       </div>
 
 
@@ -48,6 +56,17 @@ const Profile = ({user}) => (
          <div className={modal.content}>
           <hr />
           <UpdateProfile />
+         </div>
+       </div>
+    </div>
+
+    <div id="modalAvatar" className={modal.overlay}>
+       <div className={modal.popup}>
+        <h2>UPDATE AVATAR</h2>
+        <a className={modal.close} href="#a">&times;</a>
+         <div className={modal.content}>
+          <hr />
+          <UpdateAvatar />
          </div>
        </div>
     </div>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import styles from '../../css/profile.css';
 
+
 // our packages
 
 import {updateProfile} from '../../store/actions';
@@ -19,10 +20,11 @@ const mapDispatchToProps = dispatch => ({
   onUpdateClick: params => dispatch(updateProfile(params)),
 });
 
-const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onClick}) => {
+const UpdateProfile = ({onUpdateClick, user, onClick}) => {
   let nameInput;
   let surnameInput;
   let emailInput;
+  let image;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -35,12 +37,10 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
     });
   };
 
-  if (redirectToProfile) {
-    // TODO: figure out a better way to do nav
-    setImmediate(() => navToProfile());
-  }
+
 
   return (
+    <div className="jumbortron animated fadeIn">
       <form>
         <div className={`${styles.form_group}`}>
           <label htmlFor="inputName">Name:</label>
@@ -60,7 +60,7 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
             ref={(i) => { surnameInput = i; }}
           />
         </div>
-        <div className={`${styles.input}`}>
+        <div className={`${styles.form_group}`}>
           <label htmlFor="inputEmail">Email:</label>
           <input
             type="text"
@@ -69,10 +69,10 @@ const UpdateProfile = ({onUpdateClick, navToLogin, redirectToProfile, user, onCl
             ref={(i) => { emailInput = i; }}
           />
         </div>
-
         <button type="submit" className="btn btn-outline-warning waves-effect "
         onClick={handleClick} style={{ backgroundColor:'#fff'}}><strong>Update</strong></button>
       </form>
+    </div>
   );
 };
 

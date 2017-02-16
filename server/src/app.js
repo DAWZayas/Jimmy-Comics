@@ -13,6 +13,7 @@ import {auth as authConfig} from '../config';
 import setupAuthRoutes from './auth';
 import setupUserRoutes from './user';
 import setupCollectionRoutes from './collection';
+import setupImages from './images';
 
 // init app
 const app = express();
@@ -23,9 +24,13 @@ app.use(morgan('combined', {stream: logger.stream}));
 // setup CORS
 app.use(cors());
 
+
+// setup static files service
+app.use('/static', express.static('public'));
+
 // add body parsing
 app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: true, limit: '2mb'})); // for parsing application/x-www-form-urlencoded
 
 // add cookie parsing
 app.use(cookieParser());
@@ -53,6 +58,8 @@ setupAuthRoutes(app);
 setupUserRoutes(app);
 // setup collection routes
 setupCollectionRoutes(app);
+//setup images
+setupImages(app);
 
 // catch all unhandled errors
 app.use((err, req, res, next) => {
