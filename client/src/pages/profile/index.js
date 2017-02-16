@@ -18,25 +18,18 @@ const mapDispatchToProps = (dispatch) => ({
 const Profile = ({user}) => (
   <div>
       <div className="card-block">
-      <div className="col-xs-12 col-sm-4">
+      <div className="col-xs-12">
         <a href="#modalAvatar">
           <img
             key={Math.random() + 'avatar'}
             src={ user.image ||
               "https://pbs.twimg.com/profile_images/764592533636808704/YGrGoK0_.jpg"}
             className={`${styles.avatar}`}
-            style={{display:"inlineBlock", margin:"auto", marginBottom:20, width:200}}
+            style={{display:"inlineBlock", marginBottom:20, marginLeft:"25%"}}
            />
         </a>
       </div>
-
-
-      <div className="col-xs-12 col-sm-8 text-xs-center text-sm-left">
-        <strong>Logged as {user.login}{user.provider ? ` (${user.provider})` : null} <a style={{ color:"#000000", marginLeft:15}} href="#modalUser">
-          <span className="fa fa-edit fa-2x" /></a></strong><br />
-          Active Since {user.registrationDate}<br />
       </div>
-    </div>
 
     <div id="modalUser" className={modal.overlay}>
        <div className={modal.popup}>
@@ -78,6 +71,17 @@ const Profile = ({user}) => (
 
           <table className="table table-hover">
             <tbody>
+              <tr>
+                <td>Nickname</td>
+                <td>{user.login}</td>
+                <td><a style={{ color:"#000000"}} href="#modalUser">
+                  <span className="fa fa-edit fa-2x" /></a><br /></td>
+
+              </tr>
+              <tr>
+                <td>Active Since</td>
+                <td>{user.registrationDate}</td>
+              </tr>
               <tr>
                 <td>Name</td>
                 <td>{user.name}</td>
