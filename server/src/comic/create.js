@@ -1,21 +1,37 @@
 import passport from 'passport';
-
+import fs from 'fs';
+import moment from 'moment';
 
 import {Comic} from '../db';
 import {asyncRequest} from '../util';
+import {server as serverConfig} from '../../config';
 
-export default (app) => {
+export default (app, direction) => {
   app.post('/api/comic', passport.authenticate('jwt', {session: false}), asyncRequest(async (req, res) => {
-    const {name, price} = req.body;
+    const {title, caption, image} = req.body;
 
-    if (!name || !name.length) {
-      res.status(400).send({error: 'Name should be present!'});
+    if (!title || !title.length) {
+      res.status(400).send({error: 'Title should be present!'});
       return;
     }
 
+    if (!caption || !caption.length) {
+      res.status(400).send({error: 'Title should be present!'});
+      return;
+    }
+
+    if(image){
+      const base64Data = decodeURIComponent(image).replace(/^data:image\/jpeg;base64,/, '');
+      fs.writeFileSync(__dirname + '/../../public/images/profiles/' + title + '.jpg', base64Data, 'base64');
+      direction = `http://${serverConfig.host}:${serverConfig.port}/static/images/profiles/` + title + '.jpg';
+
+    }
+
     const comic = new Comic({
-      name,
-      price,
+      title,
+      caption,
+      url: direction,
+      owner: req.user.id,
     });
     await comic.save();
 

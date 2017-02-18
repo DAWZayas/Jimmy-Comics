@@ -6,6 +6,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {Provider} from 'react-redux';
 
+
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdbootstrap/css/bootstrap.min.css';
@@ -25,8 +26,7 @@ import {requireAuth} from './util';
 
 // our pages
 import Home from './pages/home';
-import MakeComic from './pages/collection/createComic';
-import Comics from './pages/comics';
+import Comics from './pages/comic';
 import Login from './pages/login';
 import Register from './pages/register';
 import Profile from './pages/profile';
@@ -40,12 +40,11 @@ ReactDOM.render((
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} onEnter={requireAuth} />
-        <Route path='createComic/:collectionId' component = {MakeComic }/>
+        <IndexRoute component={Home}  />
         <Route path="login" component={Login} />
-        <Route path="/view/:collectionId" component={Comics}></Route>
+        <Route path="/" component={Comics}></Route>
         <Route path="register" component={Register} />
-        <Route path="profile" component={Profile} />
+        <Route path="profile" component={Profile} onEnter={requireAuth} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

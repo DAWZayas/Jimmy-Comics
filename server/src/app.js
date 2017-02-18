@@ -12,7 +12,7 @@ import {logger} from './util';
 import {auth as authConfig} from '../config';
 import setupAuthRoutes from './auth';
 import setupUserRoutes from './user';
-import setupCollectionRoutes from './collection';
+import setupComicRoutes from './comic';
 import setupImages from './images';
 
 // init app
@@ -56,8 +56,8 @@ app.get('/', (req, res) => {
 setupAuthRoutes(app);
 // setup user routes
 setupUserRoutes(app);
-// setup collection routes
-setupCollectionRoutes(app);
+// setup comic routes
+setupComicRoutes(app);
 //setup images
 setupImages(app);
 

@@ -69,17 +69,8 @@ export const removeNotificationByRefAction = notificationRef => ({
   payload: {notificationRef},
 });
 
-export const getAllCollections = () => ({
-  type: ActionTypes.GET_ALL_COLLECTIONS,
-});
-
-export const getCollectionInfo = payload => ({
-  type: ActionTypes.GET_COLLECTION_INFO,
-  payload,
-});
-
-export const getComics = () => ({
-  type: ActionTypes.GET_COMICS,
+export const getAllComics = () => ({
+  type: ActionTypes.GET_ALL_COMICS,
 });
 
 export const addObservable = observable => ({
@@ -92,19 +83,14 @@ export const removeObservable = payload => ({
   payload,
 });
 
-export const createCollection = payload => ({
-  type: ActionTypes.CREATE_COLLECTION,
-  payload,
-});
-
 export const createComic = payload => ({
   type: ActionTypes.CREATE_COMIC,
   payload,
 });
 
-export const deleteCollection = collectionId => ({
-  type: ActionTypes.DELETE_COLLECTION,
-  collectionId,
+export const deleteComic = comicId => ({
+  type: ActionTypes.DELETE_COMIC,
+  comicId,
 });
 
 export const updateUser = payload => ({

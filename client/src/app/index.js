@@ -6,6 +6,8 @@ import {push} from 'react-router-redux';
 import Header from '../components/header';
 import Footer from '../components/footer';
 
+
+
 const mapStateToProps = state => ({
   actualPath: state.routing.locationBeforeTransitions && state.routing.locationBeforeTransitions.pathname,
   user: state.auth.user,
@@ -23,7 +25,7 @@ class App extends Component {
       if (nextProps.token) {
         return this.props.navTo('/');
       } else {
-        return this.props.navTo('/login');
+        return this.props.navTo('/');
       }
     }
   }
@@ -32,7 +34,7 @@ class App extends Component {
     const {children, token} = this.props;
     return (
       <div className="container">
-        {token ? <Header {...this.props} /> : null}
+        { <Header {...this.props} />}
         {children}
         <Footer />
       </div>

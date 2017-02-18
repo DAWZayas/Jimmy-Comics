@@ -16,15 +16,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  navToProfile: () => dispatch(push('/profile')),
   onUpdateClick: params => dispatch(updateProfile(params)),
 });
 
-const UpdateProfile = ({onUpdateClick, user, onClick}) => {
+const UpdateProfile = ({onUpdateClick, user}) => {
   let nameInput;
   let surnameInput;
   let emailInput;
-  let image;
+
 
   const handleClick = (e) => {
     e.preventDefault();

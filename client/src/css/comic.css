@@ -1,7 +1,7 @@
 .photo_grid {
   display: flex;
-  flex-wra: wrap;
-  max-width: 300px;
+  flex-wrap: wrap;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -28,7 +28,7 @@
   position: relative;
 }
 
-.remove_collection{
+.remove_comic{
   position: relative;
   display: inline-block;
   color: orange;
@@ -43,4 +43,25 @@
 
 .panel_body{
   text-align: center;
+}
+
+.speech_bubble{
+  size: 1.25rem;
+  width: size * 1.2;
+  height: size;
+  background: blue;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  &:after;
+    display: inline-block;
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 size size 0;
+    border-color: transparent blue transparent transparent;
+    top: 30%;
+    left: 0;
 }

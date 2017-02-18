@@ -3,42 +3,36 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import photo from '../../img/collection/add.png';
-import styles from '../../css/collection.css';
+import photo from '../../img/comic/add.png';
+import styles from '../../css/comic.css';
 import modal from '../../css/modal.css';
-import Create from '../collection/create';
+import Create from '../comic/create';
 
 
-import Collection from '../collection';
-import {getAllCollections} from '../../store/actions';
+import Comic from '../comic';
+import {getAllComics} from '../../store/actions';
 
 
 const mapStateToProps = (state) => ({
-  collections: state.collections.collections,
+  comics: state.comics.comics,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollections: _.once(() => dispatch(getAllCollections())),
+  fetchComics: _.once(() => dispatch(getAllComics())),
 });
 
 
-const Home = ({fetchCollections, collections}) => {
-  fetchCollections();
+const Home = ({fetchComics, comics}) => {
+  fetchComics();
   return(
-    <div>
-
-    <div className="col-xs-12 col-sm-6 col-lg-4 ">
+    <div className="col-xs-12">
       <div className={`${styles.photo_grid}`} >
-      <div className={`${styles.grid_figure}`} >
-      <div className={`${styles.grid_photo_wrap}`}>
-        <a href="#modalCreateCollection"><img src={photo} className={`${styles.grid_photo}`} /></a>
-        <div className={`${styles.panel_body}`}>
-          <p>Add new Collection</p>
-        </div>
+        {comics.map(comic => (
+          <Comic key={comic.id} comic={comic} />
+        ))}
       </div>
-      </div>
-      </div>
-      <div id="modalCreateCollection" className={modal.overlay}>
+      <a className="nav-link pull-right" href="#modalCreateComic" style={{ color:'#ff610f'}}> <span className="fa fa-plus-circle fa-4x" /></a>
+      <div id="modalCreateComic" className={modal.overlay}>
        <div className={modal.popup}>
         <h2>Create Collection</h2>
         <a className={modal.close} href="/">&times;</a>
@@ -46,14 +40,9 @@ const Home = ({fetchCollections, collections}) => {
           <Create />
          </div>
        </div>
+    </div>
+    </div>
 
-       </div>
-     </div>
-        {collections.map(collection => (
-          <Collection key={collection.id} collection={collection} />
-        ))}
-
-      </div>
   );
 };
 

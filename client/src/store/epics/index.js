@@ -2,7 +2,7 @@ import {initAuth, login, providerLogin, register, logout, updateUser, updateProf
 import {addNotification} from './notifications';
 import {addObservable, openConnection, closeConnection} from './realtime';
 import {helloWorld} from './helloworld';
-import {createCollection,getCollections,deleteCollection,getComics,createComic } from './collections';
+import {createComic,getComics,deleteComic } from './comics';
 
 export default [
   // auth
@@ -19,10 +19,8 @@ export default [
   closeConnection,
   // hello world
   helloWorld,
-  // collections
-  createCollection,
-  getCollections,
-  deleteCollection,
-  getComics,
+  // comics
   createComic,
+  getComics,
+  deleteComic,
 ];

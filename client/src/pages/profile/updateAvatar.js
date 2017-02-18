@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
   onUpdateClick: params => dispatch(updateProfile(params)),
 });
 
-const UpdateAvatar = ({onUpdateClick, user, onClick}) => {
+const UpdateAvatar = ({onUpdateClick, user}) => {
   let image;
 
   const handleClick = (e) => {
@@ -44,6 +44,7 @@ const UpdateAvatar = ({onUpdateClick, user, onClick}) => {
     <div className="jumbortron animated fadeIn">
       <form>
         <div className={`${styles.form_group}`}>
+          <label htmlFor="image">Image</label>
           <input
             onChange={handdleFileChange}
             type="file"
