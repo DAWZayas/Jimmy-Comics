@@ -102,3 +102,8 @@ export const updateProfile = payload => ({
   type: ActionTypes.DO_UPDATE_PROFILE,
   payload,
 });
+
+export const searchComics = text => ({
+ type: ActionTypes.SEARCH_COMIC,
+ text,
+});

@@ -74,3 +74,22 @@ export const deleteComic = action$ => action$
     ),
   )),
   );
+
+  export const searchComics = action$ => action$
+    .ofType(ActionTypes.SEARCH_COMIC)
+    .map(signRequest)
+    .switchMap(({headers, text}) => Observable
+      .ajax.delete(`http://${host}:${port}/api/comic/${text}`, headers)
+      .map(res => res.response)
+      .mergeMap(comic => Observable.of ({
+        type: ActionTypes.SEARCH_COMIC_SUCCESS,
+        caption,
+      },
+      Actions.addNotificationAction({text: 'Search Comic Success' , alertType: 'info'})
+      ))
+      .catch(error => Observable.of({
+        type: ActionTypes.SEARCH_COMIC_ERROR,
+        payload: {error},
+      },
+    )),
+    );

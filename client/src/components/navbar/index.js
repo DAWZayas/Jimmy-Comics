@@ -9,6 +9,7 @@ import Profile from '../../pages/profile';
 import styles from '../../css/navbar.css';
 import modal from '../../css/modal.css';
 import Create from '../../pages/comic/create';
+import SearchBar from '../../components/searchBar';
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.token ? true : false,
@@ -25,7 +26,7 @@ const yesAuth = (user) => (
             className={`${styles.avatar}`}
            />
           </Link>
-
+          <SearchBar />
           <a className="nav-link dropdown-toggler-right pull-right" data-toggle="dropdown" aria-haspopup="true"> <span className="fa fa-bars fa-3x" /></a>
           <div className="dropdown-menu dropdown pull-right" aria-labelledby="dropdownMenu1">
               <a className="dropdown-item"><Logout /></a>

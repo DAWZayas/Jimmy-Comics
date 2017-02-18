@@ -4,7 +4,7 @@ const initialState = {comics: [], status: 'inited'};
 
 export const comics = (state = initialState, action) => {
   switch (action.type) {
-    // all questions logic
+    // all comics logic
     case ActionTypes.GET_ALL_COMICS:
       return {
         ...state,
@@ -28,6 +28,10 @@ export const comics = (state = initialState, action) => {
     case ActionTypes.DELETE_COMIC: {
       const newComics = state.comics.filter(comic => comic.id !== action.comicId);
       return {...state, comics: newComics};
+    }
+    case ActionTypes.SEARCH_COMIC: {
+      const newComics = state.comics.filter(comic => comic.caption.toLowerCase().indexOf(action.text.toLowerCase()) !== -1);
+      return {...state, comics: newComics, search: true};
     }
     default:
       return state;

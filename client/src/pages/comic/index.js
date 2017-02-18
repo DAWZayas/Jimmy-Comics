@@ -29,7 +29,7 @@ constructor(props){
 }
 
 render (){
-  const {comic, user, onDeleteComicClick} = this.props;
+  const {comic, user, onDeleteComicClick, userId} = this.props;
 
   const handleCollapseClick = (e) => {
       e.preventDefault();
@@ -41,10 +41,13 @@ render (){
           <img src={comic.url} className={`${styles.grid_photo}`} />
           <div className={`${styles.panel_body}`}>
             <p>Comic: {comic.title}</p>
+            <p>Caption: {comic.caption}</p>
           </div>
         </div>
         <figcaption>
+          {userId === comic.owner ? (
           <button type="button" className="btn btn-warning"  onClick={() => onDeleteComicClick(comic.id)}>Delete</button>
+          ) : null}
         </figcaption>
       </div>
     );
