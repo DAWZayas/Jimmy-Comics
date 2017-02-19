@@ -26,7 +26,6 @@ import {requireAuth} from './util';
 
 // our pages
 import Home from './pages/home';
-import Comics from './pages/comic';
 import Login from './pages/login';
 import Register from './pages/register';
 import Profile from './pages/profile';
@@ -42,7 +41,6 @@ ReactDOM.render((
       <Route path="/" component={App}>
         <IndexRoute component={Home}  />
         <Route path="login" component={Login} />
-        <Route path="/" component={Comics}></Route>
         <Route path="register" component={Register} />
         <Route path="profile" component={Profile} onEnter={requireAuth} />
         <Route path="*" component={NotFound} />

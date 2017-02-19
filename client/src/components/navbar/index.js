@@ -8,7 +8,6 @@ import Logout from './logout';
 import Profile from '../../pages/profile';
 import styles from '../../css/navbar.css';
 import modal from '../../css/modal.css';
-import Create from '../../pages/comic/create';
 import SearchBar from '../../components/searchBar';
 
 const mapStateToProps = (state) => ({

@@ -7,10 +7,10 @@ export const Comic = thinky.createModel('Comic', {
   owner: thinky.type.string().required(),
   creationDate: thinky.type.date().default(thinky.r.now()),
   caption: thinky.type.string().required(),
-  comments: thinky.type.array().schema(
+  ratings: thinky.type.array().schema(
     thinky.type.object().schema({
       user: thinky.type.string().required(),
-      text: thinky.type.number(),
+      number: thinky.type.number(),
     })
   ).default([]),
 });

@@ -5,8 +5,6 @@ import {deleteComic} from '../../store/actions';
 import styles from '../../css/comic.css';
 import modal from '../../css/modal.css';
 import photo from '../../img/comic/photo.png';
-import Create from './create';
-
 
 
 const mapStateToProps = (state, {comic, user}) => ({
