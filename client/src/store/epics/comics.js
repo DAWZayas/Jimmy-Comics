@@ -8,7 +8,7 @@ import {server as serverConfig} from '../../../config';
 const host = serverConfig.host;
 const port = serverConfig.port;
 
-export const getComics = action$ => action$
+export const getAllComics = action$ => action$
   .ofType(ActionTypes.GET_ALL_COMICS)
   .switchMap(({}) => Observable
     .ajax.get(`http://${host}:${port}/api/comic`)
@@ -25,7 +25,7 @@ export const getComics = action$ => action$
       {text: `[get comics] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'},
     ),
   )),
-  );
+);
 
 export const createComic = action$ => action$
   .ofType(ActionTypes.CREATE_COMIC)
@@ -75,21 +75,31 @@ export const deleteComic = action$ => action$
   )),
   );
 
-  export const searchComics = action$ => action$
-    .ofType(ActionTypes.SEARCH_COMIC)
-    .map(signRequest)
-    .switchMap(({headers, text}) => Observable
-      .ajax.delete(`http://${host}:${port}/api/comic/${text}`, headers)
-      .map(res => res.response)
-      .mergeMap(comic => Observable.of ({
-        type: ActionTypes.SEARCH_COMIC_SUCCESS,
-        caption,
-      },
-      Actions.addNotificationAction({text: 'Search Comic Success' , alertType: 'info'})
-      ))
-      .catch(error => Observable.of({
-        type: ActionTypes.SEARCH_COMIC_ERROR,
+export const getMoreComics = action$ => action$
+  .ofType(ActionTypes.GET_MORE_COMICS)
+  .mergeMap(({headers, payload}) => Observable
+    .ajax.get(`http://${host}:${port}/api/comic?skip=${payload.skip || 0}&limit=${payload.limit}`, headers)
+    .delayInDebug(2000)
+    .map(res => res.response)
+    .map(comics => ({
+      type: ActionTypes.GET_MORE_COMICS_SUCCESS,
+      payload: {comics},
+    }))
+    .catch(error => Observable.of(
+      {
+        type: ActionTypes.GET_MORE_COMICS_ERROR,
         payload: {error},
       },
+      Actions.addNotificationAction(
+        {text: `[get more comics] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'},
+      ),
     )),
-    );
+);
+
+export const removePendingComicNotifications = action$ => action$
+  .ofType(ActionTypes.REMOVE_OBSERVABLE)
+  .filter(action => action.payload && action.payload.comic)
+  .map(action => action.payload.comic)
+  .map(comic =>
+    Actions.removeNotificationByRefAction(comic.id),
+);

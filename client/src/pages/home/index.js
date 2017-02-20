@@ -1,21 +1,24 @@
 // npm packages
 import React from 'react';
-import {connect} from 'react-redux';
+import MediaQuery from 'react-responsive';
 
-import ComicList from '../../components/comicList';
+import {ComicList, ComicSingle, CompleteComicList} from '../../components/comicList';
 
-
-const mapStateToProps = (state) => ({
-  comics: state.comics.comics,
-});
-
-const Home = ({fetchComics, comics}) => {
+const Home = ({comics}) => {
   return(
-    <div className="col-xs-12">
-      <ComicList />
+    <div>
+      <MediaQuery query="(min-width: 992px)">
+       {(matches) => {
+         if (matches) {
+           return <CompleteComicList />;
+         }else{
+            return <ComicSingle />;
+         }
+       }}
+      </MediaQuery>
     </div>
 
   );
 };
 
-export default connect(mapStateToProps, null)(Home);
+export default Home;

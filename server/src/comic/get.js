@@ -10,7 +10,9 @@ export default (app) => {
   }));
 
   app.get('/api/comic', asyncRequest(async (req, res) => {
-  const comics = await Comic.orderBy(r.asc('creationDate'));
-  res.send(comics);
-}));
+    const comics = await r.table('Comic')
+                              .pluck('id', 'title', 'url', 'creationDate', 'caption', 'owner')
+                              .orderBy(r.asc('creationDate'))
+            res.send(comics);
+  }));
 };

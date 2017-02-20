@@ -73,6 +73,11 @@ export const getAllComics = () => ({
   type: ActionTypes.GET_ALL_COMICS,
 });
 
+export const getMoreComics = payload => ({
+    type: ActionTypes.GET_MORE_COMICS,
+  payload,
+});
+
 export const addObservable = observable => ({
   type: ActionTypes.ADD_OBSERVABLE,
   payload: observable,
