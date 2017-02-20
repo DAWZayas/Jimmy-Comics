@@ -4,12 +4,12 @@ import {rethinkdb} from 'rethinkdb-websocket-client';
 import _ from 'lodash';
 
 import * as Actions from '../actions';
-import {UpdateQuestionNotification} from '../../components/question';
+import {UpdateComicNotification} from '../../components/comic';
 
 const r = rethinkdb;
 
-export const registerQuestionObservable = questionId => (conn, getState) =>
-  Observable.fromPromise(r.table('Question').filter({id: questionId}).changes().run(conn))
+export const registerComicObservable = comicId => (conn, getState) =>
+  Observable.fromPromise(r.table('Comic').filter({id: comicId}).changes().run(conn))
   .switchMap(cursor => Observable.create((observer) => {
     cursor.each((err, row) => {
       if (err) throw err;
@@ -20,20 +20,20 @@ export const registerQuestionObservable = questionId => (conn, getState) =>
     };
   }).debounceTime(5000))
   .map(row => row.new_val)
-  .filter((question) => {
-    if (!question) {
+  .filter((comic) => {
+    if (!comic) {
       return false;
     }
-    const storedQuestion = _.find(getState().questions.questions, {id: question.id});
-    return !storedQuestion || !_.isEqual(storedQuestion.answers, question.answers);
+    const storedComic = _.find(getState().comics.comics, {id: comic.id});
+    return !storedComic || !_.isEqual(storedComic.answers, comic.answers);
   })
-  .map((question) => {
+  .map((comic) => {
     const notificationId = Actions.getNextNotificationId();
     return Actions.addNotificationAction({
-      text: <UpdateQuestionNotification notificationId={notificationId} question={question} />,
+      text: <UpdateComicNotification notificationId={notificationId} comic={comic} />,
       alertType: 'warning',
       autoDisposable: false,
-      refCode: `update-question-${question.id}`,
+      refCode: `update-comic-${comic.id}`,
     });
   })
   .catch(error => Observable.of(
