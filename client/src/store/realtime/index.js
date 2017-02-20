@@ -4,7 +4,7 @@ import {rethinkdb} from 'rethinkdb-websocket-client';
 import _ from 'lodash';
 
 import * as Actions from '../actions';
-import {UpdateComicNotification} from '../../components/comic';
+import {UpdateComicNotification} from '../../components/comicList';
 
 const r = rethinkdb;
 
@@ -25,7 +25,7 @@ export const registerComicObservable = comicId => (conn, getState) =>
       return false;
     }
     const storedComic = _.find(getState().comics.comics, {id: comic.id});
-    return !storedComic || !_.isEqual(storedComic.answers, comic.answers);
+    return !storedComic || !_.isEqual(storedComic.ratings, comic.ratings);
   })
   .map((comic) => {
     const notificationId = Actions.getNextNotificationId();

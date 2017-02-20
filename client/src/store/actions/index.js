@@ -112,3 +112,13 @@ export const searchComics = text => ({
  type: ActionTypes.SEARCH_COMIC,
  text,
 });
+
+export const getRatings = comicId => ({
+  type: ActionTypes.GET_RATINGS,
+  payload: {comicId},
+});
+
+export const ratingComic = payload => ({
+  type: ActionTypes.RATING_COMIC,
+  payload,
+});

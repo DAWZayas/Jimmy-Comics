@@ -4,6 +4,9 @@ import {deleteComic} from '../../store/actions';
 import styles from '../../css/comic.css';
 import modal from '../../css/modal.css';
 
+import Ratings from './ratings.js';
+import AddRating from './addRating.js';
+
 const mapDispatchToProps = dispatch => ({
   onDeleteComicClick: comicId => dispatch(deleteComic(comicId)),
 });
@@ -12,14 +15,21 @@ class Comic extends Component{
 
 constructor(props){
   super(props);
-
+  this.state = {
+     collapse: true,
+   };
 }
 
 render (){
   const {comic, user, onDeleteComicClick, userId} = this.props;
+   const {collapse} = this.state;
 
   const handleCollapseClick = (e) => {
       e.preventDefault();
+      this.setState({
+        collapse: !this.state.collapse,
+      });
+      return false;
     };
 
     return (
@@ -34,6 +44,11 @@ render (){
           {userId === comic.owner ? (
           <button type="button" className="btn btn-warning"  onClick={() => onDeleteComicClick(comic.id)}>Delete</button>
           ) : null}
+          <span className={`glyphicon glyphicon-${collapse ? 'plus' : 'minus'}`}
+            style={{cursor: 'pointer'}}
+            onClick={handleCollapseClick} />{' '}
+          {collapse ? null : <Ratings comic={comic} loading />}
+          {collapse ? null : <AddRating comic={comic} />}
         </figcaption>
       </div>
     );

@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 
-const initialState = {comics: [], status: 'inited', hasMore: true};
+const initialState = {comics: [], status: 'inited', hasMore: true, answering: {}};
 
 export const comics = (state = initialState, action) => {
   switch (action.type) {
@@ -44,6 +44,24 @@ export const comics = (state = initialState, action) => {
     case ActionTypes.SEARCH_COMIC: {
       const newComics = state.comics.filter(comic => comic.caption.toLowerCase().indexOf(action.text.toLowerCase()) !== -1);
       return {...state, comics: newComics, search: true};
+    }
+    case ActionTypes.GET_RATINGS_SUCCESS:
+    case ActionTypes.RATING_COMIC_SUCCESS: {
+      const newComics = state.comics.map(q => q.id === action.payload.id ? action.payload : q);
+      return {
+        ...state,
+        comics: newComics,
+        status: 'done',
+        answering: action.type === ActionTypes.GET_RATINGS_SUCCESS ? state.answering : {
+          ...state.answering,
+          [action.payload.id]: false,
+        },
+        hasMore: state.hasMore,
+      };
+    }
+    case ActionTypes.RATING_COMIC: {
+      const answering = {...state.answering, [action.payload.comic.id]: true};
+      return {...state, answering};
     }
     default:
       return state;
