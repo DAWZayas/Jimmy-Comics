@@ -8,8 +8,7 @@ import Comic from './comic';
 import {Spinner} from '../../components/spinner';
 import {getMoreComics} from '../../store/actions';
 
-const mapStateToProps = (state, {user}) => ({
-  user: state.auth.user,
+const mapStateToProps = state => ({
   hasMore: state.comics.hasMore,
   loadingMore: state.comics.status === 'loading',
   comics: state.comics.comics,
@@ -38,7 +37,7 @@ class ComicSingle extends Component {
   }
 
   render (){
-    const {comics, user, hasMore, loadMore, loadingMore, onDeleteComicClick, userId} = this.props;
+    const {comics, hasMore, loadMore, loadingMore, onDeleteComicClick} = this.props;
     const {comicIndex} = this.state;
 
     const comic = comics[comicIndex];
@@ -60,7 +59,7 @@ class ComicSingle extends Component {
 
       return (
         <div>
-        {!hasMore && comics.length === 0 ? <div style={{ textAlign:'center'}}>No comics to Show!</div> : null}
+        {!hasMore && comics.length === 0 ? <div style={{ textAlign:'center'}}>No comics to show!</div> : null}
          {loadingMore ? <Spinner /> : comic ? <Comic key={comic.id} comic={comic} /> : comics.length > 0 ? <img style={{width:"100%"}} src="http://static4.comicvine.com/uploads/screen_kubrick/0/40/1290250-nomoremutantscp.jpg" /> : null}
           <button type="button" className="btn" style={{ backgroundColor:'#ff610f'}} disabled={comicIndex === 0} onClick={() => handleClick(-1)}>
             <span className="glyphicon glyphicon-arrow-left" />
@@ -71,7 +70,7 @@ class ComicSingle extends Component {
           <a className="nav-link pull-right" href="#modalCreateComic" style={{ color:'#ff610f'}}> <span className="fa fa-plus-circle fa-4x" /></a>
           <div id="modalCreateComic" className={modal.overlay}>
            <div className={modal.popup}>
-            <h2>Create Collection</h2>
+            <h2>Create Comic</h2>
             <a className={modal.close} href="/">&times;</a>
              <div className={modal.content}>
               <Create />

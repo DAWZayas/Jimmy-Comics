@@ -32,6 +32,7 @@ export default (app, direction) => {
       caption,
       url: direction,
       owner: req.user.id,
+      likes: 0,
     });
     await comic.save();
 

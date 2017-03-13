@@ -67,7 +67,7 @@ const Create = ({doCreateComic}) => {
             />
         </div>
           <button type="submit" className="btn btn-outline-warning waves-effect "
-          onClick={handleCreate} style={{ backgroundColor:'#fff'}}><strong>Update</strong></button>
+          onClick={handleCreate} style={{ backgroundColor:'#fff'}}><strong>Create</strong></button>
 
       </form>
     </div>

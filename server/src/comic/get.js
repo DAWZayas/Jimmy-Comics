@@ -10,9 +10,15 @@ export default (app) => {
   }));
 
   app.get('/api/comic', asyncRequest(async (req, res) => {
+    const skip = parseInt(req.query.skip, 10) || 0;
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const match = req.query.match || '';
     const comics = await r.table('Comic')
-                              .pluck('id', 'title', 'url', 'creationDate', 'caption', 'owner')
+                              .pluck('id', 'title', 'url', 'creationDate', 'caption', 'owner', 'likes')
+                              .filter(doc => doc('caption').match(`(?i)${match}`))
                               .orderBy(r.asc('creationDate'))
-            res.send(comics);
+                              .skip(skip)
+                             .limit(limit);
+   res.send(comics);
   }));
 };

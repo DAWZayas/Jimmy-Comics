@@ -1,32 +1,19 @@
 import * as ActionTypes from '../actionTypes';
 
-const initialState = {comics: [], status: 'inited', hasMore: true, answering: {}};
+const initialState = {comics: [], status: 'inited', hasMore: true};
 
 export const comics = (state = initialState, action) => {
   switch (action.type) {
     // all comics logic
-    case ActionTypes.GET_ALL_COMICS:
-     return {
-       ...state,
-       status: 'loading...',
-     };
-   case ActionTypes.GET_ALL_COMICS_SUCCESS:
-     return {
-       comics: action.payload.comics,
-       status: 'done',
-     };
-   case ActionTypes.GET_ALL_COMICS_ERROR:
-     return {
-       ...state,
-       status: 'error',
-       error: action.payload.error,
-     };
+    case ActionTypes.RESET_COMICS:
+     return {comics: [], status: 'loading', hasMore: true, error:null}
     case ActionTypes.GET_MORE_COMICS:
       return {...state, status: 'loading', error: null};
     case ActionTypes.GET_MORE_COMICS_SUCCESS: {
       const hasMore = action.payload.comics.length === 6;
-      return {...state, comics: state.comics.concat(action.payload.comics), status: 'done', hasMore};
+      return {...state, comics: action.payload.reset ? action.payload.comics : state.comics.concat(action.payload.comics), status: 'done', filtered: action.payload.filtered, hasMore};
     };
+    case ActionTypes.LIKE_COMIC_ERROR:
     case ActionTypes.GET_MORE_COMICS_ERROR:
       return {
         ...state,
@@ -59,10 +46,12 @@ export const comics = (state = initialState, action) => {
         hasMore: state.hasMore,
       };
     }
-    case ActionTypes.RATING_COMIC: {
-      const answering = {...state.answering, [action.payload.comic.id]: true};
-      return {...state, answering};
-    }
+    case ActionTypes.LIKE_COMIC_SUCCESS:
+    const com = state.comics.map(com => com.id === action.payload.id ? com = action.payload : com);
+     return {
+       ...state,
+       comics: com,
+     }
     default:
       return state;
   }

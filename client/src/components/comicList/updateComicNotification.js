@@ -1,14 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {removeNotificationAction, getRatings} from '../../store/actions';
+import {removeNotificationAction} from '../../store/actions';
 
 const mapDispatchToProps = dispatch => ({
   onRemoveNotificationClick: notificationId => dispatch(removeNotificationAction(notificationId)),
-  onGetRatingsClick: comicId => dispatch(getRatings(comicId)),
 });
 
-const UpdateComicNotification = ({notificationId, comic, onRemoveNotificationClick, onGetRatingsClick}) => {
+const UpdateComicNotification = ({notificationId, comic, onRemoveNotificationClick}) => {
   const onClickUpdate = (e) => {
     e.preventDefault();
     onRemoveNotificationClick(notificationId);

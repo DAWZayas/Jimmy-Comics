@@ -5,43 +5,25 @@ import {getMoreComics} from '../../store/actions';
 import {getAllComics} from '../../store/actions';
 
 const mapStateToProps = state => ({
-  isSearch: state.comics.search,
-  comics: state.comics.comics,
+  filtered: state.comics.filetered,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSearchClick: text => dispatch(searchComics(text)),
-  onBackSearchClick: (payload) => dispatch(getMoreComics(payload)),
-  onFullBackSearchClick: (payload) => dispatch(getAllComics(payload)),
+  filterComics: payload => dispatch(searchComics(payload)),
   });
 
-const searchBar = ({onSearchClick, comics, isSearch, onBackSearchClick, onFullBackSearchClick}) => {
+const searchBar = ({filtered, filterComics}) => {
 
-  let searchInput;
-
-  const handleFullBackSearch = (e) => {
-    e.preventDefault();
-    onFullBackSearchClick();
-    return false;
-  };
-
-  const handleChange = (e) => {
-   e.preventDefault();
-   if (searchInput.value !== '') {
-     onSearchClick(searchInput.value);
-   }
-   return false;
- };
-
- const handleBackSearch = () => onBackSearchClick({
-  skip: comics.length,
-  limit: 6,
-});
+  const handleChange = (e) => filterComics({
+      skip: 0,
+      limit: 10,
+      match: e.target.value,
+      reset: true,
+    });
 
   return (
       <form className="navbar-form" style={{ backgroundColor:'#ff610f', width:"50%", textAlign:"center", color:"#fff", marginLeft:"25%"}}>
-          Search Comic: <input type="text" className="form-control" onChange={handleChange} ref={(i) => { searchInput = i; }} style={{ width:"50%", marginLeft:"25%"}} />
-          {isSearch && <button className="btn navbar-btn" type="button" style={{ backgroundColor:'#ff610f'}} onClick={ handleBackSearch,handleFullBackSearch}>Show All</button>}
+          Search Comic: <input type="text" id="searchInput" className="form-control" defaultValue={filtered} onChange={handleChange} style={{ width:"50%", marginLeft:"25%"}} />
       </form>
 
   );

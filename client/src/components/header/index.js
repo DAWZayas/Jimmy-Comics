@@ -5,7 +5,6 @@ import {Link} from 'react-router';
 import NavBar from '../navbar';
 import jimmyLogo from '../../img/icons/jimmycomics.png';
 import styles from '../../css/typography.css';
-import SearchBar from '../../components/searchBar';
 
 export default (props) => (
   <header>
@@ -20,6 +19,5 @@ export default (props) => (
       <h1>Comicgram</h1>
     </Link>
       <NavBar {...props}/>
-      <SearchBar />
   </header>
 );

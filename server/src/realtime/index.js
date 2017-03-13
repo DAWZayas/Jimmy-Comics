@@ -37,7 +37,7 @@ const sessionCreator = urlQueryParams => {
 };
 
 const queryWhitelist = [
-  r.table('Question')
+  r.table('Comic')
   .filter({id: RP.ref('id')})
   .changes()
   .opt('db', r.db('expertsdb'))

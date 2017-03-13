@@ -108,17 +108,16 @@ export const updateProfile = payload => ({
   payload,
 });
 
-export const searchComics = text => ({
- type: ActionTypes.SEARCH_COMIC,
- text,
+export const searchComics = payload => ({
+ type: ActionTypes.DO_FILTER_COMICS,
+ payload,
 });
 
-export const getRatings = comicId => ({
-  type: ActionTypes.GET_RATINGS,
-  payload: {comicId},
+export const resetComics = () => ({
+  type: ActionTypes.RESET_COMICS
 });
 
-export const ratingComic = payload => ({
-  type: ActionTypes.RATING_COMIC,
+export const likeComicAction = payload => ({
+  type: ActionTypes.LIKE_COMIC,
   payload,
 });

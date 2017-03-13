@@ -78,12 +78,12 @@ export const deleteComic = action$ => action$
 export const getMoreComics = action$ => action$
   .ofType(ActionTypes.GET_MORE_COMICS)
   .mergeMap(({headers, payload}) => Observable
-    .ajax.get(`http://${host}:${port}/api/comic?skip=${payload.skip || 0}&limit=${payload.limit}`, headers)
+    .ajax.get(`http://${host}:${port}/api/comic?skip=${payload.skip || 0}&limit=${payload.limit || 10}&match=${payload.match || ''}`, headers)
     .delayInDebug(2000)
     .map(res => res.response)
     .map(comics => ({
       type: ActionTypes.GET_MORE_COMICS_SUCCESS,
-      payload: {comics},
+      payload: {comics, reset: payload.reset, filtered: payload.match},
     }))
     .catch(error => Observable.of(
       {
@@ -104,53 +104,42 @@ export const removePendingComicNotifications = action$ => action$
     Actions.removeNotificationByRefAction(comic.id),
 );
 
-export const ratingComic = action$ => action$
-  .ofType(ActionTypes.RATING_COMIC)
+export const searchComics = action$ => action$
+  .ofType(ActionTypes.DO_FILTER_COMICS)
+  .debounceTime(500)
+  .switchMap(({payload}) => Observable.of(
+    {
+      type: ActionTypes.RESET_COMICS,
+      payload,
+    },
+    {
+      type: ActionTypes.GET_MORE_COMICS,
+      payload,
+    },
+  ),
+);
+
+export const likeComic = action$ => action$
+  .ofType(ActionTypes.LIKE_COMIC)
   .map(signRequest)
-  .mergeMap(({headers, payload}) => Observable
-    .ajax.post(`http://${host}:${port}/api/comic/${payload.comic.id}/rating`, {rating: payload.rating}, headers)
-    .delayInDebug(2000)
+  .switchMap(({headers, payload}) => Observable
+    .ajax.post(`http://${host}:${port}/api/comic/like/${payload.id}`, payload, headers)
     .map(res => res.response)
     .mergeMap(comic => Observable.of(
       {
-        type: ActionTypes.RATING_COMIC_SUCCESS,
+        type: ActionTypes.LIKE_COMIC_SUCCESS,
         payload: comic,
       },
       Actions.addNotificationAction(
-        {text: `Rating: "${payload.rating}" added to comic: "${comic.title}"`, alertType: 'info'},
+        {text: `Comic with title "${comic.title}" liked`, alertType: 'info'},
       ),
-      Actions.removeNotificationByRefAction(comic.id),
     ))
     .catch(error => Observable.of(
       {
-        type: ActionTypes.RATING_COMIC_ERROR,
+        type: ActionTypes.LIKE_COMIC_ERROR,
         payload: {error},
       },
       Actions.addNotificationAction(
-        {text: `[rating create] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'},
-      ),
-    )),
-  );
-
-
-export const getRatings = action$ => action$
-  .ofType(ActionTypes.GET_RATINGS)
-  .map(signRequest)
-  .mergeMap(({headers, payload}) => Observable
-    .ajax.get(`http://${host}:${port}/api/comic/${payload.comicId}`, headers)
-    .delayInDebug(2000)
-    .map(res => res.response)
-    .map(comic => ({
-      type: ActionTypes.GET_RATINGS_SUCCESS,
-      payload: comic,
-    }))
-    .catch(error => Observable.of(
-      {
-        type: ActionTypes.GET_RATINGS_ERROR,
-        payload: {error},
-      },
-      Actions.addNotificationAction(
-        {text: `[get ratings] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'},
-      ),
-    )),
-);
+        {text: `[comic liked] Error: ${ajaxErrorToMessage(error)}`, alertType: 'danger'}
+      )
+    )));

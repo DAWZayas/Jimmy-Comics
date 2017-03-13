@@ -25,7 +25,7 @@ export const registerComicObservable = comicId => (conn, getState) =>
       return false;
     }
     const storedComic = _.find(getState().comics.comics, {id: comic.id});
-    return !storedComic || !_.isEqual(storedComic.ratings, comic.ratings);
+    return !storedComic;
   })
   .map((comic) => {
     const notificationId = Actions.getNextNotificationId();

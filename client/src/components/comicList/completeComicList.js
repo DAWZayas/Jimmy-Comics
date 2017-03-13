@@ -32,7 +32,7 @@ const CompleteComicList = ({fetchComics, comics}) => {
       <a className="nav-link pull-right" href="#modalCreateComic" style={{ color:'#ff610f'}}> <span className="fa fa-plus-circle fa-4x" /></a>
       <div id="modalCreateComic" className={modal.overlay}>
        <div className={modal.popup}>
-        <h2>Create Collection</h2>
+        <h2>Create Comic</h2>
         <a className={modal.close} href="/">&times;</a>
          <div className={modal.content}>
           <Create />

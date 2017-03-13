@@ -25,7 +25,7 @@ class App extends Component {
       if (nextProps.token) {
         return this.props.navTo('/');
       } else {
-        return this.props.navTo('/');
+        return this.props.navTo('/login');
       }
     }
   }
@@ -34,7 +34,7 @@ class App extends Component {
     const {children, token} = this.props;
     return (
       <div className="container">
-        { <Header {...this.props} />}
+      <Header {...this.props} />
         {children}
         <Footer />
       </div>
