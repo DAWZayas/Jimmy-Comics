@@ -33,10 +33,8 @@ const Login = ({onLoginClick}) => {
       <div className="jumbotron">
         <h2>Jimmy Comics</h2>
         <div className="row">
-          <div className="col-xs-6">
-            <p>Please log in. Or <Link to="/register">register</Link></p>
-          </div>
-          <div className="col-xs-2 col-md-1">
+            <p><strong>Please log in. Or <Link to="/register" style={{ color:'#ff610f'}}>register</Link></strong></p>
+          <div className="col-xs-2">
             <GitHubLogo />
             <GoogleLogo />
             <FacebookLogo />
@@ -72,7 +70,7 @@ const Login = ({onLoginClick}) => {
               /> Remember me
             </label>
           </div>
-          <button type="submit" className="btn btn-default" onClick={handleClick}>Login</button>
+          <button type="submit" className="btn btn-warning" style={{ backgroundColor:'#ff610f'}} onClick={handleClick}>Login</button>
         </form>
       </div>
     </div>

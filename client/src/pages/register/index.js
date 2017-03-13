@@ -29,7 +29,7 @@ const Register = ({onRegisterClick}) => {
     <div className="container" style={{marginTop: '100px'}}>
       <div className="jumbotron">
         <h2>Experts portal:</h2>
-        <p>Please register. Or <Link to="/login">login</Link></p>
+        <p><strong>Please register. Or <Link to="/login"  style={{ color:'#ff610f'}}>login</Link></strong></p>
 
         <form>
           <div className="form-group">
@@ -62,7 +62,7 @@ const Register = ({onRegisterClick}) => {
               ref={(i) => { passwordInputRepeat = i; }}
             />
           </div>
-          <button type="submit" className="btn btn-default" onClick={handleClick}>Register</button>
+          <button type="submit" className="btn btn" style={{ backgroundColor:'#ff610f'}} onClick={handleClick}>Register</button>
         </form>
       </div>
     </div>
